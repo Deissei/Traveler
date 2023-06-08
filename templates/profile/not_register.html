@@ -1,0 +1,41 @@
+{% load static %}
+<!-- ***custom top bar offcanvas html*** -->
+<div id="offCanvas" class="offcanvas-container">
+    <div class="offcanvas-inner">
+       <div class="offcanvas-sidebar">
+          <aside class="widget author_widget" style="display: flex; justify-content: space-around;">
+            <a href="{% url 'login_in' %}" style="border: solid 1px; padding: 6px 11px; border-radius: 25px; font-size: 22px; font-weight: 500;">LOGIN IN</a>
+            <a href="{% url 'sing_in' %}" style="border: solid 1px; padding: 6px 13px; border-radius: 25px; font-size: 22px; font-weight: 500; background-color: rgb(0,133,186); color: white;">SING IN</a>
+          </aside>
+          <aside class="widget widget_text text-center">
+             <h3 class="widget-title">СВЯЗАТЬСЯ С НАМИ</h3>
+             <div class="textwidget widget-text">
+                <p>Смело обращайтесь и<br/>  свяжись с нами !!</p>
+                <ul>
+                   <li>
+                      <a href="tel:{{ contacts.phone1 }}">
+                         <i aria-hidden="true" class="icon icon-phone1"></i>
+                         {{ contacts.phone1 }}
+                      </a>
+                   </li>
+                   <li>
+                      <a href="mailtop:{{ contacts.email1 }}">
+                         <i aria-hidden="true" class="icon icon-envelope1"></i>
+                         {{ contacts.email1 }}
+                      </a>
+                   </li>
+                   <li>
+                      <i aria-hidden="true" class="icon icon-map-marker1"></i>
+                      {{ contacts.location }}
+                   </li>
+                </ul>
+             </div>
+          </aside>
+       </div>
+       <a href="#" class="offcanvas-close">
+          <i class="fas fa-times"></i>
+       </a>
+    </div>
+    <div class="overlay"></div>
+ </div>
+ <!-- ***custom top bar offcanvas html*** -->

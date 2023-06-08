@@ -1,0 +1,103 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+
+   <div id="page" class="page">
+      
+      {% include "base/header.html" %}
+
+      <main id="content" class="site-main">
+         <!-- ***Inner Banner html start form here*** -->
+         <div class="inner-banner-wrap">
+            <div class="inner-baner-container" style="background-image: url({% static 'assets/images/img7.jpg' %});">
+               <div class="container">
+                  <div class="inner-banner-content">
+                     <h1 class="page-title">{{ key }}</h1>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- ***Inner Banner html end here*** -->
+         <!-- search section html start -->
+         <div class="search-section">
+            <div class="container">
+               <div class="search-outer-wrap">
+                  <div class="row grid">
+                     {% if destinations %}
+                     {% for des in destinations %}
+                     <div class="col-lg-4 grid-item">
+                        <div class="search-content-wrap">
+                           <article class="post">
+                              <div class="entry-content">
+                                 <img src="{{ des.image.url }}" alt="" style="padding-bottom: 15px; border-radius: 25px;">
+                                 <h3>
+                                    <a href="{% url 'no_promo_package' %}">{{ des.title }}</a>
+                                 </h3>
+                                 <p>{{ des.description|truncatewords:12 }}</p>
+                                 <div class="button-container">
+                                    <a href="{% url 'no_promo_package' %}" class="button-text">ЧИТАТЬ БОЛЬШЕ</a>
+                                 </div>
+                              </div>
+                           </article>
+                        </div>
+                     </div>
+                     {% endfor %}
+                     {% else %}
+                     {% comment %} 
+                     <div class="container">
+                        <div class="inner-banner-content">
+                           <h1 class="page-title" style="align-items: center; margin-top: -65px; font-size: 40px;">{{ key }}<br>Такого Нет</h1>
+                        </div>
+                     </div> {% endcomment %}
+                     {% endif %}
+
+
+                     {% if packages_search %}
+                     {% for des in packages_search %}
+
+                     <div class="col-lg-4 grid-item">
+                        <div class="search-content-wrap">
+                           <article class="post">
+                              <div class="entry-content">
+                                 <img src="{{ des.image.url }}" alt="" style="padding-bottom: 15px; border-radius: 25px;">
+                                 <h3>
+                                    <a href="{{ des.get_absolute_url }}">{{ des.title }}</a>
+                                 </h3>
+                                 <p>{{ des.overview|truncatewords:12 }}</p>
+                                 <div class="button-container">
+                                    <a href="{{ des.get_absolute_url }}" class="button-text">ЧИТАТЬ БОЛЬШЕ</a>
+                                 </div>
+                              </div>
+                           </article>
+                        </div>
+                     </div>
+
+                     {% endfor %}
+                     {% else %}
+                     {% endif %}
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- search section html end -->
+         
+      </main>
+      
+      {% include "base/footer.html" %}  
+
+      <a id="backTotop" href="#" class="to-top-icon">
+         <i class="fas fa-chevron-up"></i>
+      </a>
+      
+      {% include "home/blocks/search-form.html" %}
+
+      {% if request.user.is_authenticated %}
+      {% include "profile/profile.html" %}
+      {% else %}
+      {% include "profile/not_register.html" %}
+      {% endif %}
+      
+   </div>
+
+{% endblock content %}

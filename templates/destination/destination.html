@@ -1,0 +1,87 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block destination_page %}class="menu-active"{% endblock destination_page %}
+
+{% block content %}
+
+   <div id="page" class="page">
+      
+      {% include "base/header.html" %}
+
+      <main id="content" class="site-main">
+         <section class="destination-inner-page">
+            <!-- ***Inner Banner html start form here*** -->
+            <div class="inner-banner-wrap">
+               <div class="inner-baner-container" style="background-image: url({% static 'assets/images/img7.jpg' %});">
+                  <div class="container">
+                     <div class="inner-banner-content">
+                        <h1 class="page-title">ПУНКТ НАЗНАЧЕНИЯ</h1>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- ***Inner Banner html end here*** -->
+            <!-- ***destination section html start form here*** -->
+            <div class="destination-item-wrap">
+               <div class="container">
+                  <div class="row gx-5">
+                     
+                     {% for dest in destination_list %}
+                     <div class="col-lg-4 col-md-6">
+                        <article class="destination-item" style="background-image: url({{ dest.image.url }});">
+                           <div class="destination-content">
+                              <div class="rating-start-wrap">
+                                 <div class="rating-start">
+                                    <span style="width: {{ dest.raiting }}%"></span>
+                                 </div>
+                              </div>
+                              <span class="cat-link">
+                                 <a href="/">{{ dest.country }}</a>
+                              </span>
+                              <h3>
+                                 <a href="{% url 'no_promo_package' %}">{{ dest.title }}</a>
+                              </h3>
+                              <p>{{ dest.description|truncatewords:6 }}</p>
+                           </div>
+                        </article>
+                     </div>
+                     {% endfor %}
+                  </div>
+               </div>
+            </div>
+            <!-- ***destination section html start form here*** -->
+            <!-- ***callback section html start form here*** -->
+            <div class="bg-color-callback primary-bg">
+               <div class="container">
+                  <div class="row align-items-center">
+                     <div class="col-lg-8 offset-lg-2 text-center">
+                        <h5 class="sub-title">CALL TO ACTION</h5>
+                        <h2 class="section-title">READY FOR UNFORGATABLE TRAVEL. REMEMBER US!</h2>
+                        <p>Fusce hic augue velit wisi quibusdam pariatur, iusto primis, nec nemo, rutrum. Vestibulum cumque laudantium. Sit ornare mollitia tenetur, aptent.</p>
+                        <a href="contact.html" class="outline-btn outline-btn-white">Contact Us !</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- ***callback section html end here*** -->
+         </section>
+      </main>
+
+      {% include "base/footer.html" %}
+
+      <a id="backTotop" href="#" class="to-top-icon">
+         <i class="fas fa-chevron-up"></i>
+      </a>
+      
+      {% include "home/blocks/search-form.html" %}
+      
+      {% if request.user.is_authenticated %}
+      {% include "profile/profile.html" %}
+      {% else %}
+      {% include "profile/not_register.html" %}
+      {% endif %}
+      
+   </div>
+
+{% endblock content %}
